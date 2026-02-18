@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة التحقق من الشهادات - الهلال الأحمر الجزائري</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --crescent-red: #ce1126;
+      --crescent-green: #006233;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float 20s infinite alternate;
+    }
+    .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #ffdde1; animation-delay: 0s; }
+    .blob-2 { bottom: -10%; right: -10%; width: 600px; height: 600px; background: #ee9ca7; animation-delay: -5s; }
+    .blob-3 { top: 40%; left: 40%; width: 400px; height: 400px; background: #e0eafc; animation-delay: -10s; }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, 50px) scale(1.1); }
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    }
+    .custom-loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-bottom-color: var(--crescent-red);
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    .pdf-mode .pdf-watermark-container {
+      display: block !important;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1",
+    "jspdf": "https://esm.sh/jspdf@^4.1.0",
+    "html5-qrcode": "https://esm.sh/html5-qrcode@^2.3.8",
+    "papaparse": "https://esm.sh/papaparse@^5.5.3"
+  }
+}
+</script>
+</head>
+<body>
+  <div class="bg-pattern">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div id="root"></div>
+</body>
+</html>

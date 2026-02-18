@@ -1,0 +1,7 @@
+{
+  "name": "Algerian Red Crescent Certificate Verification",
+  "description": "A secure platform for verifying certificates issued by the Algerian Red Crescent (Sidi Bel Abbes Committee) using manual codes or QR scanning.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

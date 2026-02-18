@@ -129,17 +129,42 @@ const App: React.FC = () => {
       const scanner = new Html5Qrcode("reader");
       const config = { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 };
       
-      scanner.start(
-        { facingMode: "environment" },
-        config,
-        (decodedText) => {
-          scanner.stop().then(() => {
-            scanner.clear();
-            handleSearch(decodedText);
-          }).catch(() => handleSearch(decodedText));
-        },
-        () => {}
-      ).catch(console.error);
+      const startScanner = async () => {
+        try {
+          // Try environment camera first (typically the back camera on phones)
+          await scanner.start(
+            { facingMode: "environment" },
+            config,
+            (decodedText) => {
+              scanner.stop().then(() => {
+                scanner.clear();
+                handleSearch(decodedText);
+              }).catch(() => handleSearch(decodedText));
+            },
+            () => {}
+          );
+        } catch (err) {
+          console.warn("Environment camera failed, falling back to any available camera:", err);
+          try {
+            // Fallback to any available camera if environment fails (common on desktops/laptops)
+            await scanner.start(
+              { facingMode: "user" },
+              config,
+              (decodedText) => {
+                scanner.stop().then(() => {
+                  scanner.clear();
+                  handleSearch(decodedText);
+                }).catch(() => handleSearch(decodedText));
+              },
+              () => {}
+            );
+          } catch (fallbackErr) {
+            console.error("Camera fallback also failed:", fallbackErr);
+          }
+        }
+      };
+
+      startScanner();
 
       return () => {
         if (scanner.isScanning) {

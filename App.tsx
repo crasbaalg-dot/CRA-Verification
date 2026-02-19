@@ -70,7 +70,10 @@ const App: React.FC = () => {
     setInputCode(codeToSearch);
 
     const found = dataList.find(row => 
-      Object.values(row).some(val => val && val.toString().toLowerCase().trim() === query)
+      Object.keys(row).some(key => 
+        (key.toLowerCase().includes('code') || key.includes('رقم') || key.toLowerCase().includes('serial') || key.toLowerCase().includes('id')) && 
+        row[key] && row[key].toString().toLowerCase().trim() === query
+      )
     );
 
     if (found) {
